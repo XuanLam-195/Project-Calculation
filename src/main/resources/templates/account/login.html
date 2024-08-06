@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Login')">
+</head>
+<body>
+
+<div class="container">
+    <div class="row" style="margin-top: 5%">
+        <div class="col-6">
+            <div class="signup-login-flex-item">
+                <h1 style="text-align: center">Login or create new account</h1>
+                <div class="login-logo d-flex justify-content-center" style="margin-top: 50px">
+                    <img th:src="@{/image/logo.jfif}"  alt="logo" style="width: 270px">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div >
+                <h1 style="text-align: center">Login</h1>
+
+
+                <h1 style="color: red" th:text="${message}"></h1>
+
+                <form style="margin-top: 10%;" action="/account/doLogin" method="post">
+                    <div class="mb-3">
+                        <label for="email_field" class="form-label">Email:</label>
+                        <input id="email_field" class="form-control" name="email" th:value="${email}" type="text" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_field" class="form-label">Password:</label>
+                        <input id="password_field" class="form-control" th:value="${password}" name="password" type="password" required>
+                    </div>
+                    <div class="row mt-3" >
+                        <div class="col-12 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

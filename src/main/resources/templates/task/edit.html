@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Edit task')">
+</head>
+<body >
+
+<div th:replace="fragments/navbar :: navbar('')"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Update task</h1>
+            <form action="/task/update" method="post" th:object="${task}">
+                <input type="hidden"  th:field="*{id}" ></input>
+                <input type="hidden"  th:field="*{subProjectId}" ></input>
+                <div class="mb-3">
+                    <label for="task-name-field" class="form-label">Task Name</label>
+                    <input id="task-name-field"  class="form-control" th:field="*{taskName}" type="text"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="task-description-field" class="form-label">Task Description</label>
+                    <input id="task-description-field"  class="form-control" th:field="*{taskDescription}"  type="text"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedStartDate" class="form-label">Planned start date</label>
+                    <input id="plannedStartDate"   class="form-control"  th:field="*{plannedStartDate}" type="date"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedFinishDate" class="form-label">Planned finish date</label>
+                    <input id="plannedFinishDate"  class="form-control"  th:field="*{plannedFinishDate}" type="date"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="duration" class="form-label">Duration</label>
+                    <input id="duration"  class="form-control"   th:field="*{duration}" type="number"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="actualHours" class="form-label">Actual Hours</label>
+                    <input id="actualHours"  class="form-control"   th:field="*{actualHours}"  type="number"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="actualResourceCost" class="form-label">Actual Resource Cost</label>
+                    <input id="actualResourceCost"  class="form-control"  th:field="*{actualResourceCost}"   type="number"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedFinishDate" class="form-label">Assigned</label>
+                    <select name="assigned"   class="form-control">
+                        <option th:each="account : ${accounts}"  th:value="${account.id}" th:selected="${account.id == task.assigned}" th:text="${account.email}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        h2 {
+            font-weight: bold;
+            font-size: large;
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            line-height: 1.5;
+            font-variation-settings:
+                    "wdth" 100;
+        }
+        .form-control {
+            border: var(--bs-border-width) solid #444649;
+        }
+    </style>
+</head>
+
+<div th:fragment="navbar(title)">
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <span class="fs-4 fw-bold">Project Calculation Tool</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/workspace" th:classappend="${title == 'Workspace'} ? active : ''"  class="nav-link" aria-current="page">Overview</a></li>
+                <li th:if="${session.current_user.permissionLevel.name == 'EMPLOYEE'}" class="nav-item">
+                    <a href="/task/list" th:classappend="${title == 'TaskList'} ? active : ''"  class="nav-link">TaskList</a>
+                </li>
+                <li th:if="${session.current_user.permissionLevel.name == 'ADMINISTRATOR'}" class="nav-item">
+                    <a href="/account/list" th:classappend="${title == 'AccountList'} ? active : ''"  class="nav-link">Account List</a>
+                </li>
+                <li class="nav-item dropdown" th:if="${session.current_user}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                       th:text="${session.current_user.firstName }">
+
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" th:text="${session.current_user.firstName }"></a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+                <li><a th:if="!${session.current_user}" class="nav-link" th:href="@{'/login'}" href="/login">Login</a></li>
+            </ul>
+        </header>
+    </div>
+</div>

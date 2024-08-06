@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Create account')">
+</head>
+<body >
+<div th:replace="fragments/navbar :: navbar('')"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Create Account</h1>
+            <form action="/account/save" method="post" th:object="${account}">
+                <div class="mb-3">
+                    <label for="first_name_field">First name</label>
+                    <input class="form-control" id="first_name_field" th:field="*{firstName}" type="text" required>
+                </div>
+                <div class="mb-3">
+                    <label for="last_name_field">Last name</label>
+                    <input class="form-control" id="last_name_field" th:field="*{lastName}" type="text"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="email_field">Email</label>
+                    <input class="form-control" id="email_field" th:field="*{email}" type="text"  required>
+                </div>
+                <div class="mb-3">
+                    <label for="password_field">Password</label>
+                    <input class="form-control" id="password_field" th:field="*{password}" type="password"  required>
+                </div>
+                <div class="mb-3">
+                    <label>Permission Level</label>
+                    <select class="form-control" aria-label="PERMISSION LEVEL" th:field="*{permissionLevel}">
+                        <option value="EMPLOYEE">PROJECT_WORKER</option>
+                        <option value="ADMINISTRATOR"> ADMINISTRATOR</option>
+                    </select>
+                </div>
+                <br>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

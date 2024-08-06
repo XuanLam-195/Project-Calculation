@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Create subProject')">
+</head>
+
+<body >
+
+<div th:replace="fragments/navbar :: navbar('')"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Create SubProject</h1>
+            <form action="/subproject/save" method="post">
+                <div class="mb-3">
+                    <input  name="projectId" class="form-control" type="hidden" th:value="${currentproject.id}"></input>
+                    <p>Write SubProject Name for <span style="font-weight: bold">[[${currentproject.projectName}]]</span></p>
+                    <input name="projectName" placeholder="SubProject" class="form-control" type="text" required></input>
+                    <input class="form-control" type="submit" value="Create SubProject"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

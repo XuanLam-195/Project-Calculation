@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Update Account')"></head>
+<body>
+<div th:replace="fragments/navbar :: navbar('')"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Update Account</h1>
+        <br>
+
+        <form action="/account/update" method="post" th:object="${account}" style="width: 100%">
+
+            <input type="hidden"  th:field="*{id}">
+            <div class="mb-3">
+                <label for="first_name_field">First name</label>
+                <input class="form-control" id="first_name_field" th:field="*{firstName}" type="text" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name_field">Last name</label>
+                <input class="form-control" id="last_name_field" th:field="*{lastName}" type="text"  required>
+            </div>
+
+            <div class="mb-3">
+                <input class="form-control" type="hidden" id="email_field" th:field="*{email}"  required>
+            </div>
+
+            <div class="mb-3">
+                <select class="form-select" aria-label="PERMISSION LEVEL" th:field="*{permissionLevel}">
+                    <option value="EMPLOYEE" th:selected="${account.permissionLevel == 'EMPLOYEE'}">PROJECT_WORKER</option>
+                    <option value="ADMINISTRATOR" th:selected="${account.permissionLevel == 'ADMINISTRATOR'}"> ADMINISTRATOR</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Update Account</button>
+        </form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

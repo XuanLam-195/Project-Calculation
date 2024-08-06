@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('SubProject Overview')">
+</head>
+
+<style>
+    .form-group {
+        margin-bottom: 1rem;
+        border: solid 2px black;
+    }
+
+    .form-group >  h2 {
+        margin: 20px;
+        text-align: center;
+    }
+    .form-group >  table {
+        margin-left: 5%;
+        max-width: 90%
+    }
+</style>
+<body >
+
+
+<div th:replace="fragments/navbar :: navbar('')"></div>
+
+<div class="container">
+    <div class="row">
+        <div><h2 style="color: red" th:text="${message}"></h2></div>
+        <div class="col-4">
+            <h2>All Subproject</h2>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4">
+            <a style="float: right" th:href="@{'/subproject/create/' + ${currentproject.id}}">
+                <p>Create new SubProject<p/>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div th:each="subproject : ${subProjectModelList}" class="form-group">
+                <h2>
+                    <span th:text="${subproject.projectName}">SubProject name</span>
+                    <span> | </span>
+                    <a style="color: red" th:href="@{'/subproject/delete/' + ${subproject.id} + '/' + ${subproject.projectId}} ">Delete</a>
+                    <span> | </span>
+                    <a th:href="@{'/subproject/edit/' + ${subproject.id}}">Edit Name</a>
+                    <span> | </span>
+                    <a th:href="@{'/task/create/' + ${subproject.id}}">Create Task</a>
+                </h2>
+
+                <table class="table table-bordered border-primary"  style="">
+                    <thead>
+                        <tr>
+                            <th scope="col">Task Name</th>
+                            <th scope="col">Task Description</th>
+                            <th scope="col">Planned Start</th>
+                            <th scope="col">Planned Finish</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">actualHours</th>
+                            <th scope="col">actualResourceCost</th>
+                            <th scope="col">Assigned</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="task : ${subproject.taskModelList}" >
+                            <td th:text="${task.taskName}"></td>
+                            <td th:text="${task.taskDescription}"></td>
+                            <td th:text="${task.plannedStartDate}"></td>
+                            <td th:text="${task.plannedFinishDate}"></td>
+                            <td th:text="${task.duration}"></td>
+                            <td th:text="${task.actualHours}"></td>
+                            <td th:text="${task.actualResourceCost}"></td>
+                            <td th:text="${task.assignedName}"></td>
+
+                            <td><a th:href="@{'/task/edit/' + ${task.id}}"> Edit</a> |
+                                <a th:href="@{'/task/delete/' + ${task.id} + '/' + ${subproject.projectId}}"> Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table >
+                <table class="table table-bordered border-primary"    style="width: 50%">
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Total Time</th>
+                        <th>Total Cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="report : ${subproject.reportUserTimes}">
+                        <td th:text="${report.name}"></td>
+                        <td th:text="${report.totalTime} + ' hours'"></td>
+                        <td th:text="${report.totalCost}"></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

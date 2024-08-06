@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Update subProject')">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar('')"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Update Project</h1>
+            <form action="/subproject/update" method="post">
+                <div class="mb-3">
+                    <label for="project_name" class="form-label">Edit SubProject Name</label>
+                    <input type="text" class="form-control" th:value="${project.projectName}" id="project_name" name="projectName">
+                    <input name="projectId" th:value="${project.projectId}" type="hidden" required></input>
+                    <input name="id" th:value="${project.id}" type="hidden" required></input>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Update SubProject</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

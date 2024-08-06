@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Create task')">
+</head>
+<body >
+
+<div th:replace="fragments/navbar :: navbar('')"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Create task</h1>
+            <form action="/task/save" method="post">
+                <input name="subProjectId" type="hidden"  th:value="${subProjectModel.id}" ></input>
+                <div class="mb-3">
+                    <label for="task-name-field" class="form-label">Task Name</label>
+                    <input id="task-name-field"  class="form-control" name="taskName" type="text"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="task-description-field" class="form-label">Task Description</label>
+                    <input id="task-description-field"  class="form-control" name="taskDescription" type="text"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedStartDate" class="form-label">Planned start date</label>
+                    <input id="plannedStartDate"   class="form-control"  name="plannedStartDate" type="date"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedFinishDate" class="form-label">Planned finish date</label>
+                    <input id="plannedFinishDate"  class="form-control"  name="plannedFinishDate" type="date"  required></input>
+                </div>
+                <div class="mb-3">
+                    <label for="plannedFinishDate" class="form-label">Assigned</label>
+                    <select name="assigned"   class="form-control">
+                        <option th:each="account : ${accounts}"  th:value="${account.id}" th:text="${account.email}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Create Task</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

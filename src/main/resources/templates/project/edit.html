@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Update project')"></head>
+<body>
+<div th:replace="fragments/navbar :: navbar('')"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <h1>Update Project</h1>
+            <form action="/project/update" method="post">
+                <input type="hidden" name="id" th:value="${project.id}">
+                <div class="mb-3">
+                    <label for="project_name" class="form-label">Project Name</label>
+                    <input type="text" class="form-control" th:value="${project.projectName}" id="project_name" name="projectName">
+                </div>
+                <div class="mb-3">
+                    <label for="project_description" class="form-label">Project Description</label>
+                    <input type="text" class="form-control" th:value="${project.projectDescription}" id="project_description" name="projectDescription">
+                </div>
+                <div class="mb-3">
+                    <label for="project_owner" class="form-label">Project Manager</label>
+                    <input type="text" class="form-control" th:value="${project.projectManager}" id="project_owner" name="projectManager">
+                </div>
+                <div class="mb-3">
+                    <label for="targetDate" class="form-label">Target Date</label>
+                    <input type="date" class="form-control" th:value="${project.targetDate}" id="targetDate" name="targetDate" value="2024-01-01">
+                </div>
+                <div class="mb-3">
+                    <label for="budget" class="form-label">Budget</label>
+                    <input type="number" class="form-control" th:value="${project.budget}" id="budget" name="budget">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="projectStatus" value="true" th:checked="${project.projectStatus}" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="projectStatus" value="false" th:checked="${!project.projectStatus}" id="flexRadioDefault2" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Inactive
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Update Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

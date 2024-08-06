@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Workspace')">
+</head>
+<style>
+    .col-4 {
+        margin-bottom: 10px;
+    }
+</style>
+<body >
+<div th:replace="fragments/navbar :: navbar('Workspace')"></div>
+
+<div class="container">
+    <div class="row">
+        <h1>Active Projects</h1>
+        <h2 style="color: red">[[${message}]]</h2>
+        <div  class="col-4" th:each="project : ${projects}" th:if="${project.projectStatus}">
+            <div style=" border: solid 1px green; height: 210px" >
+                <div style="margin: 10px">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <p>PROJECT MANAGER:</p>
+                        </div>
+                        <div class="col-6 fw-bold ">
+                            <p th:text="${project.projectManager}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <p>PROJECT NAME:</p>
+                        </div>
+                        <div class="col-6 fw-bold ">
+                            <p th:text="${project.projectName}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <p>TARGET DATE:</p>
+                        </div>
+                        <div class="col-6 fw-bold ">
+                            <p th:text="${project.targetDate}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <p>BUDGET:</p>
+                        </div>
+                        <div class="col-6 fw-bold ">
+                            <p th:text="${project.budget}"></p>
+                        </div>
+                    </div>
+                    <a class="m-1"  th:href="@{'/project/edit/' + ${project.id}}" href="/modifyproject"> Modify Project</a>
+                    <a class="m-1" th:href="@{'/subproject/overview/' + ${project.id}}" href="/overview">Go to project</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div style="border: solid 1px green; height: 210px">
+                <div style="margin: 10px">
+                    <div class="row" style="margin-top: 80px">
+                        <div class="col-12 " style="text-align: center">
+                            <p>CREATE PROJECT</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center" >
+                        <a class="m-1" th:href="@{'/project/create'}">Create Project</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4" th:each="project : ${projects}" th:unless="${project.projectStatus}">
+            <div style="border: solid 1px blue">
+                <div style="margin: 10px">
+                    <div class="row">
+                        <div class="col-6">
+                            PROJECT MANAGER:
+                        </div>
+                        <div class="col-6">
+                            <h3 th:text="${project.projectManager}"></h3>
+                        </div>
+                    </div>
+
+                    <h2 th:text="${project.projectName}"></h2>
+                    <p th:text="${project.projectDescription}"></p>
+                    <p th:text="${project.targetDate}"></p>
+                    <a class="m-1"  th:href="@{'/project/delete/' + ${project.id}}" > Delete Project</a>
+                    <a class="m-1"  th:href="@{'/project/edit/' + ${project.id}}" > Modify Project</a>
+                    <a class="m-1" th:href="@{'/subproject/overview/' + ${project.id}}" >Go to project</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar :: head('Account List')">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar('AccountList')"></div>
+
+<div class="container">
+    <div class="row">
+        <div><h1 style="color: red" th:text="${message}"></h1></div>
+        <div><h1>List Account</h1></div>
+        <div class="table-link"><a th:href="@{'/account/create'}"><p
+                class="sprint-button">Create new Account
+            <p/></a></div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10" >
+            <h1>Account List</h1>
+            <table  class="table  table-bordered border-primary">
+                <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="acc : ${accountList}">
+                    <td th:text="${acc.email}"></td>
+                    <td th:text="${acc.firstName}"></td>
+                    <td th:text="${acc.lastName}"></td>
+                    <td th:text="${acc.permissionLevel}"></td>
+
+                    <td><a th:href="@{'/account/edit/' + ${acc.id}}"> Edit</a> |
+                        <a th:href="@{'/account/delete/' + ${acc.id}}"> Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
